@@ -3,17 +3,20 @@
 <p>Description: <%= @post.description %></p>
 
 <p>
-<%= render 'shared/errors', obj: @comment %>
-  <%= form_for [@post, @comment] do |f| %>
-    <%= f.label :body %>
-    <%= f.text_area :body %>
-    <br>
-    <%= f.submit "Create comment", class: 'btn btn-primary' %>
+  <% if logged_in? %>
+
+    <%= render 'shared/errors', obj: @comment %>
+      <%= form_for [@post, @comment] do |f| %>
+        <%= f.label :body %>
+        <%= f.text_area :body %>
+        <br>
+        <%= f.submit "Create comment", class: 'btn btn-primary' %>
+    <% end %>
   <% end %>
   <h4>Comments:</h4>
   <ol>
   <% @post.comments.each do |c| %>
-    <li><%= c.body %></li>
+    <li><%= c.body %> by <%= c.creator.username %></li>
   <% end %>
   </ol>
 </p>

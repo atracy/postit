@@ -3,6 +3,12 @@
 <ul>
 <% @post.each do |post| %>
   <li>
+    (
+      <%= link_to '+', votes_post_path(post), method: 'post' %>
+    /
+      <%= link_to '-', votes_post_path(post), method: 'post' %>
+      )
+
     <small>
       <%= link_to post.title, post_path(post) %>
       <%= link_to 'edit', edit_post_path(post) %>
